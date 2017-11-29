@@ -48,4 +48,18 @@ public class SandboxApplicationIT extends AbstractTestNGSpringContextTests {
 				.expectStatus().isOk()
 				.expectBody().jsonPath("status", "UP");
 	}
+
+	@Test
+	public void testMoreActuators() {
+		webClient
+				.get().uri("/application")
+				.accept(MediaType.APPLICATION_JSON)
+				.exchange()
+				.expectStatus().isOk()
+				.expectBody()
+				.jsonPath("_links.info").isMap()
+				.jsonPath("_links.beans").isMap()
+				.jsonPath("_links.loggers").isMap()
+				.jsonPath("_links.status").isMap();
+	}
 }

@@ -22,7 +22,7 @@ public class WebClientIT extends AbstractTestNGSpringContextTests {
 	private static final WebTestClient WEB_TEST_CLIENT = WebTestClient.bindToServer().baseUrl(SERVER).build();
 	private static final WebClient WEB_CLIENT = WebClient.builder().baseUrl(SERVER).build();
 
-	@Test
+	@Test(enabled = false)
 	public void makeRequestWithWebTestClient() {
 		WEB_TEST_CLIENT
 				.get().uri("/")
@@ -31,7 +31,7 @@ public class WebClientIT extends AbstractTestNGSpringContextTests {
 				.expectBody().consumeWith(resp -> assertThat(resp.toString()).contains(BODY_CONTENT));
 	}
 
-	@Test
+	@Test(enabled = false)
 	public void withRetrieveAndBlockMethod() {
 		String body = WEB_CLIENT
 				.get().uri("/")
@@ -41,7 +41,7 @@ public class WebClientIT extends AbstractTestNGSpringContextTests {
 		assertThat(body).contains(BODY_CONTENT);
 	}
 
-	@Test
+	@Test(enabled = false)
 	public void withExchangeMethod() {
 		String body = WEB_CLIENT
 				.get().uri("/")
