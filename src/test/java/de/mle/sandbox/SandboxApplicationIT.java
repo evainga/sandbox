@@ -46,6 +46,6 @@ public class SandboxApplicationIT extends AbstractTestNGSpringContextTests {
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody().json("{\"status\":\"UP\"}");
+				.expectBody().jsonPath("status", "UP");
 	}
 }
