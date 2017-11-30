@@ -43,7 +43,7 @@ public class ControllerIT {
 	@Test
 	public void testActuatorStatus() {
 		webClient
-				.get().uri("/application/status")
+				.get().uri("/actuator/health")
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
@@ -53,7 +53,7 @@ public class ControllerIT {
 	@Test
 	public void testMoreActuators() {
 		webClient
-				.get().uri("/application")
+				.get().uri("/actuator")
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
@@ -61,6 +61,6 @@ public class ControllerIT {
 				.jsonPath("_links.info").isMap()
 				.jsonPath("_links.beans").isMap()
 				.jsonPath("_links.loggers").isMap()
-				.jsonPath("_links.status").isMap();
+				.jsonPath("_links.env").isMap();
 	}
 }
