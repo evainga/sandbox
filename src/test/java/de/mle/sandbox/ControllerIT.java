@@ -1,18 +1,19 @@
 package de.mle.sandbox;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.testng.annotations.Test;
 
 import reactor.core.publisher.Mono;
-import sandbox.SandboxApplication;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { SandboxApplication.class })
-public class SandboxApplicationIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class ControllerIT {
 
 	@Autowired
 	private WebTestClient webClient;

@@ -1,4 +1,4 @@
-package sandbox;
+package de.mle.sandbox;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

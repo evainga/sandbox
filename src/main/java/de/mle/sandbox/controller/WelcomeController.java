@@ -1,4 +1,4 @@
-package sandbox;
+package de.mle.sandbox.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

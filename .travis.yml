@@ -7,4 +7,7 @@ install: true
 script: mvn clean verify
 
 jdk:
-- oraclejdk8
+  - oraclejdk8
+
+services:
+  - mongodb

@@ -9,7 +9,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.testng.annotations.Test;
 
-import sandbox.SandboxApplication;
+import de.mle.sandbox.SandboxApplication;
 
 /**
  * Initial showcase of the new reactive clients {@code WebClient} and
