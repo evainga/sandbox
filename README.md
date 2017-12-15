@@ -7,3 +7,8 @@ For playing around with new features.
 ## Starting
 
 Clone this project and simply execute all included tests via ```mvn clean verify```.
+
+## Try it instantly
+
+https://sandbox-pro.herokuapp.com/actuator
+
