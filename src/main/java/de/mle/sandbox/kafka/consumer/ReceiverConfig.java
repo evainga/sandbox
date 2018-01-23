@@ -18,15 +18,12 @@ import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 @Configuration
 @EnableKafka
 public class ReceiverConfig {
-
 	@Value("${kafka.bootstrap-servers}")
 	private String bootstrapServers;
 
 	@Bean
 	public Map<String, Object> consumerConfigs() {
 		Map<String, Object> props = new HashMap<>();
-		// list of host:port pairs used for establishing the initial connections to the
-		// Kafka cluster
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -48,7 +45,6 @@ public class ReceiverConfig {
 	public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
 		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory());
-
 		return factory;
 	}
 
