@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
@@ -25,35 +24,15 @@ import org.springframework.kafka.listener.config.ContainerProperties;
 import org.springframework.kafka.test.rule.KafkaEmbedded;
 import org.springframework.kafka.test.utils.ContainerTestUtils;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import de.mle.sandbox.EmbeddedKafkaInitializer;
-import de.mle.sandbox.kafka.consumer.Receiver;
-import de.mle.sandbox.kafka.producer.Sender;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-@DirtiesContext
 public class KafkaIT extends EmbeddedKafkaInitializer {
 	private static final String TOPIC = "helloworld.t";
 
 	@Autowired
-	private Receiver receiver;
-
-	@Autowired
-	private Sender sender;
-
-	@Autowired
 	private KafkaEmbedded kafkaEmbedded;
-
-	@Test
-	public void testReceive() throws Exception {
-		sender.send(TOPIC, "Hello Spring Kafka!");
-
-		receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
-		assertThat(receiver.getLatch().getCount()).isEqualTo(0);
-	}
 
 	@Test
 	public void testTemplate() throws Exception {
