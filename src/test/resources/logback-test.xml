@@ -10,7 +10,7 @@
 	<appender name="IN_MEMORY" class="de.mle.sandbox.logging.MemoryAppender">
 	</appender>
 
-	<logger name="de.mle.sandbox.kafka.producer.Sender" level="INFO" additivity="false">
+	<logger name="de.mle.sandbox.kafka.producer.Sender" level="INFO" additivity="true">
 		<appender-ref ref="IN_MEMORY" />
 	</logger>
 
