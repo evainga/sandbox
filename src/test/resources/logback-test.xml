@@ -7,6 +7,13 @@
 		</encoder>
 	</appender>
 
+	<appender name="IN_MEMORY" class="de.mle.sandbox.MemoryAppender">
+	</appender>
+
+	<logger name="de.mle.sandbox.kafka.producer.Sender" level="INFO" additivity="false">
+		<appender-ref ref="IN_MEMORY" />
+	</logger>
+
 	<logger name="de.mle.sandbox" level="INFO" />
 
 	<root level="WARN">
