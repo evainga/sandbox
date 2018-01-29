@@ -13,6 +13,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 import de.mle.sandbox.EmbeddedKafkaInitializer;
+import de.mle.sandbox.kafka.producer.Sender;
 import de.mle.sandbox.logging.MemoryAppender;
 
 import ch.qos.logback.classic.Level;
@@ -41,6 +42,7 @@ public class ProductUpdateNotifierControllerIT extends EmbeddedKafkaInitializer 
 
 		// then
 		List<ILoggingEvent> loggingEventsWithCorrectId = MemoryAppender.LOG_MESSAGES.stream()
+				.filter(loggingEvent -> loggingEvent.getLoggerName().equals(Sender.class.getName()))
 				.filter(loggingEvent -> loggingEvent.getLevel() == Level.INFO)
 				.filter(loggingEvent -> loggingEvent.getFormattedMessage().equals(expectedLogMessage))
 				.collect(Collectors.toList());
