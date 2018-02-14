@@ -102,6 +102,61 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Enable this plugin and change the bootstrap servers in src/test/resources/application.yml for full Kafka integration 
+				in tests instead of using org.springframework.kafka.test.rule.KafkaEmbedded
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.24.0</version>
+				<configuration>
+					<showLogs>true</showLogs>
+					<verbose>true</verbose>
+					<images>
+						<image>
+							<name>wurstmeister/zookeeper:latest</name>
+							<alias>zookeeper</alias>
+							<run>
+								<ports>
+									<port>2181:2181</port>
+								</ports>
+							</run>
+						</image>
+						<image>
+							<name>wurstmeister/kafka:1.0.0</name>
+							<alias>kafka</alias>
+							<run>
+								<ports>
+									<port>9092:9092</port>
+								</ports>
+								<links>
+									<link>zookeeper:zookeeper</link>
+								</links>
+								<env>
+									<KAFKA_ADVERTISED_HOST_NAME>127.0.0.1</KAFKA_ADVERTISED_HOST_NAME>
+									<KAFKA_ZOOKEEPER_CONNECT>zookeeper:2181</KAFKA_ZOOKEEPER_CONNECT>
+								</env>
+							</run>
+						</image>
+					</images>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-containers</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>remove-containers</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
