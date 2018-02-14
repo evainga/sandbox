@@ -102,8 +102,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Enable this plugin and change the bootstrap servers in src/test/resources/application.yml for full Kafka integration 
-				in tests instead of using org.springframework.kafka.test.rule.KafkaEmbedded
 			<plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
@@ -112,6 +110,18 @@
 					<showLogs>true</showLogs>
 					<verbose>true</verbose>
 					<images>
+						<image>
+							<name>mongo</name>
+							<alias>mongo</alias>
+							<run>
+								<ports>
+									<port>27017:27017</port>
+								</ports>
+							</run>
+						</image>
+						<!--
+							Enable these images and change the bootstrap servers in src/test/resources/application.yml
+							for full Kafka integration in tests instead of using org.springframework.kafka.test.rule.KafkaEmbedded.
 						<image>
 							<name>wurstmeister/zookeeper:latest</name>
 							<alias>zookeeper</alias>
@@ -137,6 +147,7 @@
 								</env>
 							</run>
 						</image>
+						-->
 					</images>
 				</configuration>
 				<executions>
@@ -156,7 +167,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
