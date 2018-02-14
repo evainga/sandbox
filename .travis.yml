@@ -1,6 +1,6 @@
 language: java
 
-sudo: false
+sudo: required # required by Docker
 
 install: true
 
@@ -10,4 +10,4 @@ jdk:
   - oraclejdk8
 
 services:
-  - mongodb
+  - docker
