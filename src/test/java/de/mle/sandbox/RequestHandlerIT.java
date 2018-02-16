@@ -1,7 +1,6 @@
 package de.mle.sandbox;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.web.reactive.function.client.ExchangeFilterFunctions.basicAuthentication;
 
 import java.net.URI;
@@ -12,27 +11,27 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.FluxExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
 
 import de.mle.sandbox.domain.Post;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class RequestHandlerIT extends EmbeddedKafkaInitializer {
-
 	@Autowired
-	private ApplicationContext context;
+	private RouterFunction<ServerResponse> routes;
 
 	private WebTestClient client;
 
 	@Before
 	public void init() {
 		client = WebTestClient
-				.bindToApplicationContext(context)
+				.bindToRouterFunction(routes)
 				.configureClient()
 				.baseUrl("http://localhost:8080/")
 				.build();
@@ -70,7 +69,7 @@ public class RequestHandlerIT extends EmbeddedKafkaInitializer {
 				.returnResult(Void.class);
 
 		URI location = postResult.getResponseHeaders().getLocation();
-		assertNotNull(location);
+		assertThat(location).isNotNull();
 
 		EntityExchangeResult<byte[]> getResult = client
 				.get()
@@ -81,7 +80,7 @@ public class RequestHandlerIT extends EmbeddedKafkaInitializer {
 				.returnResult();
 
 		String getPost = new String(getResult.getResponseBody());
-		assertTrue(getPost.contains(title));
+		assertThat(getPost).contains(title);
 	}
 
 }

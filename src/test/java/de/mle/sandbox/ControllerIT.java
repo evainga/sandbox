@@ -1,19 +1,34 @@
 package de.mle.sandbox;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
 
 import reactor.core.publisher.Mono;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ControllerIT extends EmbeddedKafkaInitializer {
-
+	@Autowired
+	private RouterFunction<ServerResponse> monoRouterFunction;
 	@Autowired
 	private WebTestClient webClient;
+
+	private WebTestClient webClientWithRouterFunction;
+
+	@Before
+	public void init() {
+		webClientWithRouterFunction = WebTestClient
+				.bindToRouterFunction(monoRouterFunction)
+				.configureClient()
+				.baseUrl("http://localhost:8080/")
+				.build();
+	}
 
 	@Test
 	public void testWelcome() {
@@ -27,7 +42,7 @@ public class ControllerIT extends EmbeddedKafkaInitializer {
 
 	@Test
 	public void testEcho() {
-		webClient
+		webClientWithRouterFunction
 				.post().uri("/echo")
 				.contentType(MediaType.TEXT_PLAIN)
 				.accept(MediaType.TEXT_PLAIN)
