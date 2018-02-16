@@ -16,7 +16,7 @@ import de.mle.sandbox.EmbeddedKafkaInitializer;
 import de.mle.sandbox.domain.ProductOpinion;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ProductOpinionControllerIT extends EmbeddedKafkaInitializer {
+public class ProductOpinionControllerActionsIT extends EmbeddedKafkaInitializer {
 	private static final String SERVER = "http://localhost";
 	private WebClient webClientWithBaseUrl;
 	private WebClient webClient;
@@ -45,6 +45,7 @@ public class ProductOpinionControllerIT extends EmbeddedKafkaInitializer {
 
 		// then
 		assertThat(returnedOpinion.getName()).isEqualTo("name");
+		assertThat(returnedOpinion.getRatingCount()).isEqualTo(3);
 	}
 
 	@Test
@@ -102,7 +103,7 @@ public class ProductOpinionControllerIT extends EmbeddedKafkaInitializer {
 	private String createProductOpinionAndReturnLocationHeader() {
 		return webClientWithBaseUrl
 				.post().uri("/productOpinions")
-				.syncBody(new ProductOpinion("name", "email", "subject", "rating", "comment"))
+				.syncBody(new ProductOpinion("name", "email@mail.com", "subject", 3, "comment", "127.0.0.1", "www.hostname.de"))
 				.exchange()
 				.block()
 				.headers().header(HttpHeaders.LOCATION).get(0);

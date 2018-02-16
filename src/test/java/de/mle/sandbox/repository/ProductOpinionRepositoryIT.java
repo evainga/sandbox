@@ -27,7 +27,7 @@ public class ProductOpinionRepositoryIT extends EmbeddedKafkaInitializer {
 
 	@Test
 	public void findProductOpinionById() {
-		ProductOpinion productOpinion = new ProductOpinion("name", "email", "subject", "rating", "comment");
+		ProductOpinion productOpinion = new ProductOpinion("name", "email", "subject", 3, "comment", "127.0.0.1", "www.hostname.de");
 
 		productOpinion = repository.save(productOpinion);
 
