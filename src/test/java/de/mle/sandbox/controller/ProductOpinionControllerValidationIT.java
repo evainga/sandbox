@@ -55,12 +55,13 @@ public class ProductOpinionControllerValidationIT extends EmbeddedKafkaInitializ
 	public void checkConditionalValidation() {
 		// when
 		SpringValidationErrors errorResponse = postProductOpinionAndReturnErrorObject(
-				new ProductOpinion("name", "email@mail.com", "subject", 5, "comment", "127.0.0.1", "www.hostname.de"));
+				new ProductOpinion("name", "email@mail.com", "subject", 5, "good comment", "127.0.0.1", "www.hostname.de"));
 
 		// then
 		assertThat(errorResponse.getErrors().get(0).getEntity()).isEqualTo("ProductOpinion");
-		assertThat(errorResponse.getErrors().get(0).getProperty()).isEqualTo("ratingCount");
-		assertThat(errorResponse.getErrors().get(0).getInvalidValue()).isEqualTo("40");
+		assertThat(errorResponse.getErrors().get(0).getProperty()).isEqualTo("comment");
+		assertThat(errorResponse.getErrors().get(0).getInvalidValue()).isEqualTo("good comment");
+		assertThat(errorResponse.getErrors().get(0).getMessage()).isEqualTo("5 stars and a good comment do not fit together!");
 	}
 
 	private SpringValidationErrors postProductOpinionAndReturnErrorObject(ProductOpinion opinion) {

@@ -18,7 +18,7 @@ public class BeforeCreateValidator implements Validator {
 
 	private void conditionalValidation(ProductOpinion opinion, Errors errors) {
 		if (opinion.getRatingCount() == 5 && opinion.getComment().contains("good"))
-			errors.reject("5 stars and a good comment do not fit together!");
+			errors.rejectValue("comment", "comment.rating-count.mismatch", "5 stars and a good comment do not fit together!");
 	}
 
 }
