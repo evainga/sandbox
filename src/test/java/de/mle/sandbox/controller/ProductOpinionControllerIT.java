@@ -15,9 +15,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import de.mle.sandbox.EmbeddedKafkaInitializer;
 import de.mle.sandbox.domain.ProductOpinion;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ProductOpinionControllerIT extends EmbeddedKafkaInitializer {
 	private static final String SERVER = "http://localhost";
@@ -47,8 +44,7 @@ public class ProductOpinionControllerIT extends EmbeddedKafkaInitializer {
 				.block();
 
 		// then
-		log.info("Returned opinion {}", returnedOpinion);
-		// assertThat(returnedOpinion.getId()).isEqualTo(savedOpinion.getId());
+		assertThat(returnedOpinion.getName()).isEqualTo("name");
 	}
 
 	@Test
