@@ -2,7 +2,7 @@ package de.mle.sandbox.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,14 +28,28 @@ public class ProductOpinionRepositoryIT extends EmbeddedKafkaInitializer {
 
 	@Test
 	public void findProductOpinionById() {
-		ProductOpinion productOpinion = new ProductOpinion("name", "email", "subject", 3, "comment", "127.0.0.1", "www.hostname.de",
-				State.NEW);
+		// given
+		ProductOpinion savedProductOpinion = repository.save(new ProductOpinion("name", "email", "subject", 3, "comment", "127.0.0.1", "www.hostname.de",
+				State.NEW));
 
-		productOpinion = repository.save(productOpinion);
+		// when
+		ProductOpinion foundOpinion = repository.findById(savedProductOpinion.getId()).get();
 
-		Optional<ProductOpinion> opinions = repository.findById(productOpinion.getId());
+		assertThat(savedProductOpinion.getId()).isEqualTo(foundOpinion.getId());
+		assertThat(savedProductOpinion.getRatingCount()).isEqualTo(foundOpinion.getRatingCount());
+	}
 
-		assertThat(opinions).isPresent();
-		assertThat(opinions.get()).isEqualTo(productOpinion);
+	@Test
+	public void findProductOpinionByState() {
+		// given
+		repository.save(new ProductOpinion("new one", "email", "subject", 3, "comment", "127.0.0.1", "www.hostname.de", State.NEW));
+		repository.save(new ProductOpinion("approved one", "email", "subject", 3, "comment", "127.0.0.1", "www.hostname.de", State.APPROVED));
+
+		// when
+		List<ProductOpinion> opinions = repository.findByState(State.APPROVED);
+
+		// then
+		assertThat(opinions).hasSize(1);
+		assertThat(opinions.iterator().next().getState()).isEqualTo(State.APPROVED);
 	}
 }
