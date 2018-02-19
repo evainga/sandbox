@@ -14,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import de.mle.sandbox.EmbeddedKafkaInitializer;
 import de.mle.sandbox.domain.ProductOpinion;
+import de.mle.sandbox.domain.State;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ProductOpinionControllerActionsIT extends EmbeddedKafkaInitializer {
@@ -100,10 +101,27 @@ public class ProductOpinionControllerActionsIT extends EmbeddedKafkaInitializer 
 		assertThat(statusCode).isEqualTo(HttpStatus.NOT_FOUND);
 	}
 
+	@Test
+	public void approveProductOpinionpatchExistingProductOpinion() {
+		// given
+		String newOpinionLocation = createProductOpinionAndReturnLocationHeader();
+
+		// when
+		ProductOpinion patchedOpinion = webClient
+				.patch().uri(newOpinionLocation)
+				.syncBody(Maps.newHashMap("state", State.APPROVED))
+				.retrieve()
+				.bodyToMono(ProductOpinion.class)
+				.block();
+
+		// then
+		assertThat(patchedOpinion.getState()).isEqualTo(State.APPROVED);
+	}
+
 	private String createProductOpinionAndReturnLocationHeader() {
 		return webClientWithBaseUrl
 				.post().uri("/productOpinions")
-				.syncBody(new ProductOpinion("name", "email@mail.com", "subject", 3, "comment", "127.0.0.1", "www.hostname.de"))
+				.syncBody(new ProductOpinion("name", "email@mail.com", "subject", 3, "comment", "127.0.0.1", "www.hostname.de", State.NEW))
 				.exchange()
 				.block()
 				.headers().header(HttpHeaders.LOCATION).get(0);

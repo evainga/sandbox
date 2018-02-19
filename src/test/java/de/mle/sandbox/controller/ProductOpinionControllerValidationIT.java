@@ -12,6 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import de.mle.sandbox.EmbeddedKafkaInitializer;
 import de.mle.sandbox.domain.ProductOpinion;
 import de.mle.sandbox.domain.SpringValidationErrors;
+import de.mle.sandbox.domain.State;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ProductOpinionControllerValidationIT extends EmbeddedKafkaInitializer {
@@ -31,7 +32,7 @@ public class ProductOpinionControllerValidationIT extends EmbeddedKafkaInitializ
 	public void checkEMailValidation() {
 		// when
 		SpringValidationErrors errorResponse = postProductOpinionAndReturnErrorObject(
-				new ProductOpinion("name", "email-invalid", "subject", 4, "comment", "127.0.0.1", "www.hostname.de"));
+				new ProductOpinion("name", "email-invalid", "subject", 4, "comment", "127.0.0.1", "www.hostname.de", State.NEW));
 
 		// then
 		assertThat(errorResponse.getErrors().get(0).getEntity()).isEqualTo("ProductOpinion");
@@ -43,7 +44,7 @@ public class ProductOpinionControllerValidationIT extends EmbeddedKafkaInitializ
 	public void checkRatingStarsValidation() {
 		// when
 		SpringValidationErrors errorResponse = postProductOpinionAndReturnErrorObject(
-				new ProductOpinion("name", "email@mail.com", "subject", 40, "comment", "127.0.0.1", "www.hostname.de"));
+				new ProductOpinion("name", "email@mail.com", "subject", 40, "comment", "127.0.0.1", "www.hostname.de", State.NEW));
 
 		// then
 		assertThat(errorResponse.getErrors().get(0).getEntity()).isEqualTo("ProductOpinion");
@@ -55,7 +56,7 @@ public class ProductOpinionControllerValidationIT extends EmbeddedKafkaInitializ
 	public void checkConditionalValidation() {
 		// when
 		SpringValidationErrors errorResponse = postProductOpinionAndReturnErrorObject(
-				new ProductOpinion("name", "email@mail.com", "subject", 0, "good comment", "127.0.0.1", "www.hostname.de"));
+				new ProductOpinion("name", "email@mail.com", "subject", 0, "good comment", "127.0.0.1", "www.hostname.de", State.NEW));
 
 		// then
 		assertThat(errorResponse.getErrors().get(0).getEntity()).isEqualTo("ProductOpinion");

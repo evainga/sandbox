@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -37,4 +38,6 @@ public class ProductOpinion {
 	private String clientIp;
 	@NotBlank
 	private String hostName;
+	@NotNull
+	private State state;
 }

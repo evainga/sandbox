@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import de.mle.sandbox.EmbeddedKafkaInitializer;
 import de.mle.sandbox.domain.ProductOpinion;
+import de.mle.sandbox.domain.State;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ProductOpinionRepositoryIT extends EmbeddedKafkaInitializer {
@@ -27,7 +28,8 @@ public class ProductOpinionRepositoryIT extends EmbeddedKafkaInitializer {
 
 	@Test
 	public void findProductOpinionById() {
-		ProductOpinion productOpinion = new ProductOpinion("name", "email", "subject", 3, "comment", "127.0.0.1", "www.hostname.de");
+		ProductOpinion productOpinion = new ProductOpinion("name", "email", "subject", 3, "comment", "127.0.0.1", "www.hostname.de",
+				State.NEW);
 
 		productOpinion = repository.save(productOpinion);
 
