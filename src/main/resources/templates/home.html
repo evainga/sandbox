@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="backofficeHead">head</div>
+
+<body>
+	<div th:replace="backofficeNavi">navigation</div>
+
+	<div class="container theme-showcase" role="main">
+		<br /> <br />
+		<div class="page-header">
+			<h1>Product opinion backoffice</h1>
+		</div>
+
+		<h2>All product opinions</h2>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>E-mail</th>
+					<th>Subject</th>
+					<th>Rating count</th>
+					<th>Comment</th>
+					<th>IP address</th>
+					<th>Host name</th>
+					<th>State</th>
+				</tr>
+			</thead>
+			<tbody id="entryTable">
+				<tr th:each="opinion : ${opinions}">
+					<td th:text="${opinion.name}" class="name-cell">Name</td>
+					<td th:text="${opinion.email}" class="category-cell">E-Mail</td>
+					<td th:text="${opinion.subject}" class="url-cell">Subject</td>
+					<td th:text="${opinion.ratingCount}" class="name-cell">3</td>
+					<td th:text="${opinion.comment}" class="category-cell">Comment</td>
+					<td th:text="${opinion.clientIp}" class="url-cell">127.0.0.1</td>
+					<td th:text="${opinion.hostName}" class="host-cell">localhost</td>
+					<td class="state-cell">
+						<span th:if="${opinion.state == T(de.mle.sandbox.domain.State).NEW}" class="label label-danger" th:text="${opinion.state}">NEW</span>
+						<span th:if="${opinion.state == T(de.mle.sandbox.domain.State).APPROVED}" class="label label-success" th:text="${opinion.state}">APPROVED</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../favicon.ico">
+	
+	<title>Product opinion backoffice</title>
+	
+	<html xmlns:th="http://www.thymeleaf.org">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<style>
+		.navbar-inverse {
+			background-color: #0f3c64;
+			border-color: #0d2943;
+		}
+		.navbar-inverse .navbar-brand {
+			color: white;
+			margin-top: 4px;
+		}
+		.navbar-inverse .navbar-nav>li>a {
+			color: #7fa6ad;
+			margin-top: 5px;
+		}
+		.navbar-inverse .navbar-nav > .open > a:focus {
+			background-color: #0d2943;
+		}
+		.app-icon{
+			width: 50px;
+			padding: 5px;
+			float: right;
+		}
+		.breakAll {
+			word-break: break-all;
+		}
+		
+		button {
+			float: right;
+			margin-left: 5px;
+		}
+
+		.btn-danger,
+		.btn-danger:focus{
+			background-color: #fff;
+			color: #d9534f;
+		}
+
+		.btn-danger:hover:focus .badge,
+		.btn-danger .badge {
+			background-color: #d9534f;
+			color: #fff;
+		}
+
+		.btn-danger.active:focus .badge,
+		.btn-danger.active .badge,
+		.btn-danger:hover .badge {
+			background-color: #fff;
+			color: #d9534f;
+		}
+
+		.btn-warning,
+		.btn-warning:focus {
+			background-color: #fff;
+			color: #eea236;
+		}
+
+		.btn-warning:hover:focus .badge,
+		.btn-warning .badge {
+			background-color: #eea236;
+			color: #fff;
+		}
+
+		.btn-warning.active:focus .badge,
+		.btn-warning.active .badge,
+		.btn-warning:hover .badge {
+			background-color: #fff;
+			color: #eea236;
+		}
+
+		.btn-success,
+		.btn-success:focus{
+			background-color: #fff;
+			color: #4cae4c;
+		}
+
+		.btn-success:hover:focus .badge,
+		.btn-success .badge {
+			background-color: #4cae4c;
+			color: #fff;
+		}
+
+		.btn-success.active:focus .badge,
+		.btn-success.active .badge,
+		.btn-success:hover .badge {
+			background-color: #fff;
+			color: #4cae4c;
+		}
+		.btn .badge {
+			margin-left: 5px;
+			min-width: 35px;
+		}
+		.label {
+			display: inline-block;
+			min-width: 50px;
+		}
+		.progress-bar {
+			position: relative;
+		}
+		.progress-bar:first-child:nth-last-child(1) {
+			border-radius: 5px 5px 5px 5px;
+		}
+		.progress-bar:last-child {
+			border-radius: 0 5px 5px 0;
+		}
+		.progress-bar:first-child {
+			border-radius: 5px 0 0 5px;
+		}
+		.progress-bar-default{
+			background-color: #777777;
+		}
+		.progress{
+			overflow: visible;
+		}
+		.progress :hover .tooltip{
+			opacity: 1;
+		}
+		.tooltip {
+			opacity: 0;
+			background-color: darkgray;
+			color: white;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px;
+
+			/* Position the tooltip */
+			position: absolute;
+			z-index: 1;
+			top: -160%;
+		}
+
+		.tooltip::after {
+			content: "";
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: darkgrey transparent transparent transparent;
+		}
+	</style>
+</head>
