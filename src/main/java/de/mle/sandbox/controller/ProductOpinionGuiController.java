@@ -15,7 +15,7 @@ public class ProductOpinionGuiController {
 
 	@GetMapping(path = "/productOpinions/gui")
 	public ModelAndView productOpinionsGui() {
-		return new ModelAndView("home", "opinions", productOpinionRepository.findAll());
+		return new ModelAndView("back-office", "opinions", productOpinionRepository.findAll());
 	}
 
 }
