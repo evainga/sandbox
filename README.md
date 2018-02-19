@@ -17,4 +17,4 @@ Clone this project and simply execute all included tests via ```mvn clean verify
 ## Try it instantly
 
 * …by inspecting it through Spring Boot's actuators: https://sandbox-pro.herokuapp.com/actuator
-* …by Spring Data REST's HAL browser: http://sandbox-pro.herokuapp.com:8080/browser/index.html#/productOpinions
+* …by Spring Data REST's HAL browser: http://sandbox-pro.herokuapp.com/browser/index.html#/productOpinions
