@@ -102,7 +102,7 @@ public class ProductOpinionControllerActionsIT extends EmbeddedKafkaInitializer 
 	}
 
 	@Test
-	public void approveProductOpinionpatchExistingProductOpinion() {
+	public void approveProductOpinion() {
 		// given
 		String newOpinionLocation = createProductOpinionAndReturnLocationHeader();
 
