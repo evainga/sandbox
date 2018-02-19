@@ -5,10 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class WelcomeController {
-
 	@GetMapping("/")
 	public String welcome() {
-		return "Hello World";
+		return "Welcome at the sandbox – explore it via the HAL browser, located at /browser/index.html#/productOpinions";
 	}
-
 }
