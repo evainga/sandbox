@@ -37,7 +37,9 @@ public class ControllerIT extends EmbeddedKafkaInitializer {
 				.accept(MediaType.TEXT_PLAIN)
 				.exchange()
 				.expectBody(String.class)
-				.isEqualTo("Hello World");
+				.returnResult()
+				.getResponseBody()
+				.contains("Welcome at the sandbox");
 	}
 
 	@Test

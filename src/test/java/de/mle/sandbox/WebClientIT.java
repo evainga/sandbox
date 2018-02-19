@@ -16,7 +16,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class WebClientIT extends EmbeddedKafkaInitializer {
-	private static final String BODY_CONTENT = "Hello World";
+	private static final String BODY_CONTENT = "Welcome at the sandbox";
 	private static final String SERVER = "http://localhost";
 
 	private WebTestClient webTestClient;
