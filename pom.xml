@@ -115,6 +115,7 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.24.0</version>
 				<configuration>
+					<skip>${skipDocker}</skip>
 					<showLogs>true</showLogs>
 					<verbose>true</verbose>
 					<images>
