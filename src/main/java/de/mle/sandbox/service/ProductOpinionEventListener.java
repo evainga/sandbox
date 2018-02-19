@@ -9,7 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ProductOpinionEventListener extends AbstractRepositoryEventListener<ProductOpinion> {
 	@Override
-	public void onAfterCreate(ProductOpinion productOpinion) {
-		log.info("Created product opinion {}", productOpinion);
+	public void onBeforeCreate(ProductOpinion productOpinion) {
+		log.warn("Before creating product opinion {}", productOpinion);
 	}
+
+	@Override
+	public void onAfterCreate(ProductOpinion productOpinion) {
+		log.warn("After creating product opinion {}", productOpinion);
+	}
+
 }
